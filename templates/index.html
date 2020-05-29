@@ -1,0 +1,201 @@
+<html>
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         
+        <!-- css-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='index.css') }}">
+        
+      
+    
+    <!-- scripts-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"></script>
+    <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
+    <script src='{{url_for("static",filename="index.js")}}'></script>
+
+    </head>
+    <body>
+        <!-- Trigger the modal with a button -->
+        <div class="container d-none">
+            <div class="my-5 mx-auto text-center">
+                <button class="btn btn-dark btn-lg" data-toggle="modal" data-target="#username-form">Open</button>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+        <div id="username-form" class="modal fade" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabel">Welcome to <i class="far fa-comment-dots ml-2"></i>
+                            Flack!</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div id="contact-form">
+                            <div class="form-group">
+                                <p>Please type in your username to start chating:</p>
+                                <input id="username-input" class="form-control" name="name" required type="text"
+                                       placeholder="Your username">
+                                <button id="start" class="btn btn-success mt-2">Start</button>
+                            </div>
+        
+                        </div>
+                        <div class="username-alert alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Please fill in your username</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+        
+                        <div class="user-exists-alert alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Sorry, this username is already taken</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- change username form-->
+        <div class="container d-none">
+            <div class="my-5 mx-auto text-center">
+                <button class="btn btn-dark btn-lg" data-toggle="modal" data-target="#change-username-form">Open</button>
+            </div>
+        </div>
+        
+        <div id="change-username-form" class="modal fade" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel1"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Changing username</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please type in your new username to start chating:</p>
+                        <div id="change-contact-form">
+                            <div class="form-group">
+                                <input id="change-username-input" class="form-control" name="name1" required type="text"
+                                       placeholder="Your new username">
+                                <button id="change-btn" class="btn btn-success mt-2">Change</button>
+                            </div>
+                        </div>
+                        <div class="change-username-alert alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Please fill in your username</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+        
+                        <div class="change-user-exists-alert alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Sorry, this username is already taken</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--nav-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light elem-blur">
+            <a class="navbar-brand" href="#">
+                <i class="far fa-comment-dots"></i> Flack
+            </a>
+            <div class="form-inline my-2 my-lg-0">
+                <button id="username-btn" class="btn btn-1 btn-primary my-2 my-sm-0"></button>
+            </div>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+            </div>
+        </nav>
+        <div id="main-div" class="container-fluid wrapper elem-blur">
+            <div id="channels-div" class="menu">
+                <button class="menu-btn btn "><i class="fas fa-ellipsis-v"></i></button>
+                
+                           
+        
+                <div class="public-channels">
+                    <button class="add-public-channel btn"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+                    <h5>Public Channels</h5>
+                    <div id="channel-input-wrapper" class="input-group mb-2">
+                        <div class="input-group-append">
+                            <div class="input-group-text">#</div>
+                        </div>
+                        <input type="text" class="form-control" id="public-channel-input" placeholder="New channel">
+                    </div>
+        
+                    <div id="public-channels">
+                        <h6 class="channel channel-active">General</h6>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="content">
+                <div id="messages" class="text-center"></div>
+                <div class="typingUsers">
+                    <img class="mr-2" src="{{ url_for('static', filename='typing.gif') }}">
+                    <span id="typingUsersText"></span>
+                </div>
+                <div class="files">
+                    <button id="close-files" type="button" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+        
+                    <img id="load-img" width="30px" src="{{ url_for('static', filename='loading.gif') }}">
+        
+                    <div class="docs"></div>
+                </div>
+        
+                <div class="input-wrapper">
+                    <div id="message-input" class="form-group d-flex justify-content-center">
+                        <button class="attach-btn form-control btn btn-outline-primary text-center">
+                            <div class="image-upload">
+                                <label for="file-input">
+                                    <i class="fas fa-paperclip "></i>
+                                </label>
+        
+                                <input id="file-input" type="file" multiple/>
+                            </div>
+                        </button>
+                        
+                        <div class="input-group mb-2" id="message">
+                            <input  type="textarea" id="emojionearea1" class="form-control" placeholder="Your message" >
+                        </div>
+
+                        <button class="send-btn form-control btn btn-outline-primary text-center"><i
+                                class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+        
+            </div>
+        
+        </div>
+        
+    </body>
+</html>
