@@ -235,8 +235,9 @@ $(document).ready(function(){
         });
 
         
-            
+          
         socket.emit('get all channels', 
+        
         {"username": localStorage.getItem('username')});
 
 
@@ -321,37 +322,36 @@ $(document).ready(function(){
     });
 
      socket.on('typing',function(msg){
-         if(msg['channel']==localStorage.getItem('currentChannel')){
+        if(msg['channel']==localStorage.getItem('currentChannel')){
             if (msg['usernames'].length == 0 || msg['usernames'][0] == localStorage.getItem('username') && msg['usernames'].length == 1) {
                 $("#typingUsersText").html('');
                 $(".typingUsers").css("display", "none");
-            } else {
+            } else 
+            {
                 $("#typingUsersText").html('');
-                
-                msg['usernames'].forEach(function (username) {
-                    if (username == localStorage.getItem('username')) {
+                 
+                msg['usernames'].forEach(function(username) {
+                    if (username !== localStorage.getItem('username')) {
                         $("#typingUsersText").append(`${username}, `);
                     }
-
-                    let temp = $("#typingUsersText").html().slice(0, -2);
-                    
-                    $("#typingUsersText").html(temp);
-                    if (msg['usernames'].length == 1 || msg['usernames'].length == 2 && msg['usernames'].includes(localStorage.getItem('username'))) {
-                        $("#typingUsersText").append(" is typing");
-                    } else {
-                        $("#typingUsersText").append(" are typing");
-                    }
-                    $(".typingUsers").css("display", "block");
-
                 });
+     
+                let temp = $("#typingUsersText").html().slice(0, -2);
+                         
+                 $("#typingUsersText").html(temp);
+                 if (msg['usernames'].length == 1 || msg['usernames'].length == 2 && msg['usernames'].includes(localStorage.getItem('username')))
+                 {
+                     $("#typingUsersText").append(" is typing");
+                 } else {
+                     $("#typingUsersText").append(" are typing");
+                 }
+                 $(".typingUsers").css("display", "block");
+             }
+            
+     
+      }
 
-            }
-
-
-         }
-
-
-     });
+         });
 
     //
     $('.menu-btn').on('click', function (e) {

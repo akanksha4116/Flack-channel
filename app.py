@@ -25,7 +25,8 @@ def get_channels():
     res=[]
     for keys in channels.keys():
         res.append(keys)
-        return res
+        
+    return res
 
 def append_message(list,msg):
  if len(list) == 100:
