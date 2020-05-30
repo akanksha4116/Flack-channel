@@ -1,5 +1,5 @@
 $(document).ready(function(){
-   $("#username-form").modal('show');
+   $("#username-form").modal({backdrop: 'static', keyboard: false},'show');
    var months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     function get_date(){
       
@@ -40,7 +40,7 @@ $(document).ready(function(){
     $("#username-btn").on('click', function () {
        
 
-        $("#change-username-form").modal('show');
+        $("#change-username-form").modal({backdrop: 'static', keyboard: false},'show');
     });
 
     $("#username-btn").hover(function(){
