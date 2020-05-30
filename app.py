@@ -125,18 +125,23 @@ def get_all_channels(msg):
 
 @socketio.on("type")
 def on_type(msg):
+
+    
 	username = msg['username']
+    
 	channel = msg['channel']
 	if msg['status'] == "end":
+        
 		if msg['username'] in typing_users[msg['channel']]:
 			typing_users[msg['channel']].remove(msg['username'])
-
+        
 		message = {
 			"usernames": typing_users[channel],
 			"channel": channel,
-			"files": {}
+			"files": {},
+            "status":msg["status"]
 		}
-
+        
 		emit('typing', message, broadcast=True)
 	else:
 		if channel not in typing_users:
@@ -147,9 +152,10 @@ def on_type(msg):
 		message = {
 			"usernames": typing_users[channel],
 			"channel": channel,
-			"files": {}
+			"files": {},
+            "status":msg["status"]
 		}
-
+      
 		emit('typing', message, broadcast=True)
 
 

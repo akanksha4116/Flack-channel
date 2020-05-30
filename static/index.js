@@ -163,7 +163,7 @@ $(document).ready(function(){
         var date= get_date();
         
        message= $("#emojionearea1").val();
-       if(message=="")
+       if($(".emojionearea-editor").html()=="")
        {return}
        else
        { 
@@ -181,7 +181,7 @@ $(document).ready(function(){
         
     });
 
-    //on pressing enter for  sending msg
+    
 
    
     //adding new channel
@@ -322,6 +322,7 @@ $(document).ready(function(){
     });
 
      socket.on('typing',function(msg){
+        
         if(msg['channel']==localStorage.getItem('currentChannel')){
             if (msg['usernames'].length == 0 || msg['usernames'][0] == localStorage.getItem('username') && msg['usernames'].length == 1) {
                 $("#typingUsersText").html('');
@@ -370,7 +371,10 @@ $(document).ready(function(){
 
     });
 
-    $("#message").blur(function () {
+   
+
+    $("#emojionearea1").blur(function () {
+        
         socket.emit('type', {
             "status": "end",
             "channel": localStorage.getItem('currentChannel'),
@@ -378,4 +382,5 @@ $(document).ready(function(){
         });
     });
 
+    
 });
