@@ -6,7 +6,7 @@ $(document).ready(function(){
             wwwMatches    : true,
             tldMatches    : true
         },
-        email       : flase,
+        email       : false,
         phone       : true,
         mention     : 'instagram',
         hashtag     : 'instagram',
