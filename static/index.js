@@ -1,4 +1,29 @@
 $(document).ready(function(){
+    //autolinker
+    var autolinker = new Autolinker( {
+        urls : {
+            schemeMatches : true,
+            wwwMatches    : true,
+            tldMatches    : true
+        },
+        email       : flase,
+        phone       : true,
+        mention     : 'instagram',
+        hashtag     : 'instagram',
+    
+        stripPrefix : true,
+        stripTrailingSlash : true,
+        newWindow   : true,
+    
+        truncate : {
+            length   : 0,
+            location : 'end'
+        },
+    
+        className : ''
+    } );
+
+    
    $("#username-form").modal({backdrop: 'static', keyboard: false},'show');
    var months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
     function get_date(){
@@ -104,6 +129,7 @@ $(document).ready(function(){
    });
 
    $("#change-btn").on('click', function () {
+       date=get_date();
     if ($("#change-username-input").prop("value") === "") {
         $(".change-username-alert").css("display", "block");
     } else {
@@ -132,7 +158,7 @@ $(document).ready(function(){
                     "channel": localStorage.getItem('currentChannel'),
                     "new_username": localStorage.getItem('username'),
                     "old_username": old_username,
-                    "date": date
+                    
                 });
 
             } else {
@@ -245,6 +271,7 @@ $(document).ready(function(){
     });
 
     socket.on('announce_message',function(msg){
+       var m= document.getElementById("messages")
          
         if(msg['messages'])
         {   
@@ -258,22 +285,23 @@ $(document).ready(function(){
             messages.forEach(msg_ => {
                 
             if(msg_['channel']==localStorage.getItem('currentChannel'))
-              {  
+              {   alert("12")
                   //connected 1st time
-                
+                  text= autolinker.link(msg_['text']);
                 if(msg_['connection']){
 
                     $("#messages").append(`<div class="row msg-row justify-content-center"><div class="msg-connect">
-                    <p><b>${msg_['username']}</b> ${msg_['text']}<span class="message-date">${msg_['date']}</span></p></div></div>`)
+                    <p><b>${msg_['username']}</b> ${text}<span class="message-date">${msg_['date']}</span></p></div></div>`)
                 }
                 else{
+                    
                     if (msg_['username'] == localStorage.getItem('username')) {
                         $("#messages").append(`<div class="row msg-row justify-content-end"><div class="message-wrapper">
-                                            <p><b>${msg_['username']}</b><span class="message-date">${msg_['date']}</span></p>${msg_['text']}</div></div>`);
+                                            <p><b>${msg_['username']}</b><span class="message-date"></span></p>${text}</div></div>`);
                     } else {
                         
                         $("#messages").append(`<div class="row msg-row"><div class="message-wrapper msg-other">
-                                            <p><b>${msg_['username']}</b><span class="message-date">${msg_['date']}</span></p>${msg_['text']}</div></div>`);
+                                            <p><b>${msg_['username']}</b><span class="message-date"></span></p>${text}</div></div>`);
                     }
                 }
 
@@ -282,17 +310,19 @@ $(document).ready(function(){
 
         } //for chat
         else {
-              
+            
+           text= autolinker.link(msg['text']);
+             
             if (msg['username'] == localStorage.getItem('username')) {
                 $("#messages").append(`<div class="row msg-row justify-content-end"><div class="message-wrapper">
-                                                <p><b>${msg['username']}</b><span class="message-date">${msg['date']}</span></p>${msg['text']}</div></div>`);
+                                                <p><b>${msg['username']}</b><span class="message-date">${msg['date']}</span></p>${text}</div></div>`);
             } else {
                 $("#messages").append(`<div class="row msg-row"><div class="message-wrapper msg-other">
-                                                <p><b>${msg['username']}</b><span class="message-date">${msg['date']}</span></p>${msg['text']}</div></div>`);
+                                                <p><b>${msg['username']}</b><span class="message-date">${msg['date']}</span></p>${text}</div></div>`);
             }
 
         }
-
+        m.scrollTop= m.scrollHeight
     })
 
     socket.on('added_channel',function(msg){

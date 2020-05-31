@@ -102,12 +102,12 @@ def change_username(msg):
 					"connection": True,
 					"text": f"is now {new_username}",
 					"username": old_username,
-				#	"date": msg['date'],
-					'channel': channel
+				    "channel": channel
 				}
             append_message(channels[channel], message)
             users[channel][n] = new_username
-        print(channels[channel]) 
+        print(channels[channel])
+        print("1")
         emit('announce_message', {'messages': channels[channel]},broadcast=True)
 
 
