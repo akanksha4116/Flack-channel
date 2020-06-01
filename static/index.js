@@ -428,7 +428,7 @@ $(document).ready(function(){
 
     $(window).resize(function() {
         
-        var $htmlOrBody = document.getElementsByClassName("content"), // scrollTop works on <body> for some browsers, <html> for others
+        var $htmlOrBody = document.getElementById("messgae-input"), // scrollTop works on <body> for some browsers, <html> for others
         scrollTopPadding = 8;
         // get input tag's offset top position
 
