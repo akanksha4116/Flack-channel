@@ -421,7 +421,7 @@ $(document).ready(function(){
      
     $("#message").focus(function() {
         
-        document.body.scrollTop = $(this).offset().top;
+        document.body.scrollTop += this.getBoundingClientRect().top - 10
         // OR  To add animation for smooth scrolling, use this. 
         //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
    }); 
