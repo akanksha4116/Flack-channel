@@ -419,7 +419,7 @@ $(document).ready(function(){
         });
     });
      
-    $(window).resize(function() {
+    $("#message").focus(function() {
         
         var $htmlOrBody = $('html, body'), // scrollTop works on <body> for some browsers, <html> for others
         scrollTopPadding = 8;
@@ -427,7 +427,7 @@ $(document).ready(function(){
         var textareaTop = $(this).offset().top;
         //alert(textareaTop)
         // scroll to the textarea
-        document.getElementById("message-input").scrollTop(textareaTop - scrollTopPadding);
+        document.getElementById("message").scrollTop(textareaTop - scrollTopPadding);
     
         // OR  To add animation for smooth scrolling, use this. 
         //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
