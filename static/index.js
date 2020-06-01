@@ -427,7 +427,7 @@ $(document).ready(function(){
         var textareaTop = $(this).offset().top;
         //alert(textareaTop)
         // scroll to the textarea
-        $htmlOrBody.scrollTop(textareaTop - scrollTopPadding);
+        document.getElementById("message-input").scrollTop(textareaTop - scrollTopPadding);
     
         // OR  To add animation for smooth scrolling, use this. 
         //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
