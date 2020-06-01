@@ -427,16 +427,16 @@ $(document).ready(function(){
    }); */
 
     $(window).resize(function() {
-        alert("1")
+        
         var $htmlOrBody = document.getElementsByClassName("content"), // scrollTop works on <body> for some browsers, <html> for others
         scrollTopPadding = 8;
         // get input tag's offset top position
 
         var textareaTop = $(this).offset().top;
-        alert(textareaTop)
+        
         // scroll to the textarea
         $htmlOrBody.scrollTop(textareaTop - scrollTopPadding);
-        
+        alert(textareaTop)
         // OR  To add animation for smooth scrolling, use this. 
         //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
     });
