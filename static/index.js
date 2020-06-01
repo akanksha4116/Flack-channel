@@ -432,8 +432,8 @@ $(document).ready(function(){
         scrollTopPadding = 8;
         // get input tag's offset top position
 
-        var textareaTop = $(this).offset().top;
-        
+        var textareaTop = $($htmlOrBody).offset().top;
+        alert(textareaTop)
         // scroll to the textarea
         $htmlOrBody.scrollTop(textareaTop - scrollTopPadding);
         alert(textareaTop)
