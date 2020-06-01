@@ -393,6 +393,13 @@ $(document).ready(function(){
      //for displaying who is typing
 
      $('#message').bind('input propertychange', function () {
+
+        scrollTopPadding = 8;
+        // get input tag's offset top position
+        var textareaTop = $(this).offset().top;
+        alert(textareaTop)
+        // scroll to the textarea
+        $(this).scrollTop(textareaTop - scrollTopPadding);
         socket.emit('type', {
             "status": "start",
             "channel": localStorage.getItem('currentChannel'),
