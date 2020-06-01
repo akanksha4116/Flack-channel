@@ -424,7 +424,7 @@ $(document).ready(function(){
     
         // OR  To add animation for smooth scrolling, use this. 
         //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
- */  });
+   }); */
 
     $(window).resize(function() {
         alert("1")
