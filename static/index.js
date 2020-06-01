@@ -285,7 +285,7 @@ $(document).ready(function(){
             messages.forEach(msg_ => {
                 
             if(msg_['channel']==localStorage.getItem('currentChannel'))
-              {   alert("12")
+              {   
                   //connected 1st time
                   text= autolinker.link(msg_['text']);
                 if(msg_['connection']){
@@ -411,6 +411,29 @@ $(document).ready(function(){
             "username": localStorage.getItem('username')
         });
     });
+     
+    $(window).resize(function() {
+        var $htmlOrBody = $('html, body'), // scrollTop works on <body> for some browsers, <html> for others
+        scrollTopPadding = 8;
+        // get input tag's offset top position
+        var textareaTop = $(this).offset().top;
+        // scroll to the textarea
+        $htmlOrBody.scrollTop(textareaTop - scrollTopPadding);
+    
+        // OR  To add animation for smooth scrolling, use this. 
+        //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
+    });
 
+    $(window).resize(function() {
+        var $htmlOrBody = document.getElementsByClassName("content"), // scrollTop works on <body> for some browsers, <html> for others
+        scrollTopPadding = 8;
+        // get input tag's offset top position
+        var textareaTop = $(this).offset().top;
+        // scroll to the textarea
+        $htmlOrBody.scrollTop(textareaTop - scrollTopPadding);
+    
+        // OR  To add animation for smooth scrolling, use this. 
+        //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
+    });
     
 });
