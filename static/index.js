@@ -412,8 +412,8 @@ $(document).ready(function(){
         });
     });
      
-    $(window).resize(function() {
-        alert("2")
+ /*   $(window).resize(function() {
+        
         var $htmlOrBody = $('html, body'), // scrollTop works on <body> for some browsers, <html> for others
         scrollTopPadding = 8;
         // get input tag's offset top position
@@ -424,7 +424,7 @@ $(document).ready(function(){
     
         // OR  To add animation for smooth scrolling, use this. 
         //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
-    });
+ */  });
 
     $(window).resize(function() {
         alert("1")
