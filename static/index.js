@@ -412,7 +412,7 @@ $(document).ready(function(){
         });
     });
      
- /*   $(window).resize(function() {
+    $(window).resize(function() {
         
         var $htmlOrBody = $('html, body'), // scrollTop works on <body> for some browsers, <html> for others
         scrollTopPadding = 8;
@@ -424,21 +424,8 @@ $(document).ready(function(){
     
         // OR  To add animation for smooth scrolling, use this. 
         //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
-   }); */
+   }); 
 
-    $(window).resize(function() {
-        
-        var $htmlOrBody = document.getElementById("messgae-input"), // scrollTop works on <body> for some browsers, <html> for others
-        scrollTopPadding = 8;
-        // get input tag's offset top position
 
-        var textareaTop = $($htmlOrBody).offset().top;
-        alert(textareaTop)
-        // scroll to the textarea
-        $htmlOrBody.scrollTop(textareaTop - scrollTopPadding);
-        alert(textareaTop)
-        // OR  To add animation for smooth scrolling, use this. 
-        //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
-    });
     
 });
