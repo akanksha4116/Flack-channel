@@ -149,6 +149,7 @@ $(document).ready(function(){
                 $(".change-username-alert").css("display", "none");
                 localStorage.setItem('username', $("#change-username-input").val());
                 $("#username-btn").html(localStorage.getItem('username'));
+                $("#change-username-input").val("")
                 $('#change-username-form').modal('hide');
 
                
@@ -158,7 +159,7 @@ $(document).ready(function(){
                     "channel": localStorage.getItem('currentChannel'),
                     "new_username": localStorage.getItem('username'),
                     "old_username": old_username,
-                    
+                    "date": date
                 });
 
             } else {
@@ -289,19 +290,20 @@ $(document).ready(function(){
                   //connected 1st time
                   text= autolinker.link(msg_['text']);
                 if(msg_['connection']){
-
+                      
                     $("#messages").append(`<div class="row msg-row justify-content-center"><div class="msg-connect">
                     <p><b>${msg_['username']}</b> ${text}<span class="message-date">${msg_['date']}</span></p></div></div>`)
                 }
                 else{
+                   
                     
                     if (msg_['username'] == localStorage.getItem('username')) {
                         $("#messages").append(`<div class="row msg-row justify-content-end"><div class="message-wrapper">
-                                            <p><b>${msg_['username']}</b><span class="message-date"></span></p>${text}</div></div>`);
+                                            <p><b>${msg_['username']}</b></p>${text}</div></div>`);
                     } else {
                         
                         $("#messages").append(`<div class="row msg-row"><div class="message-wrapper msg-other">
-                                            <p><b>${msg_['username']}</b><span class="message-date"></span></p>${text}</div></div>`);
+                                            <p><b>${msg_['username']}</b></p>${text}</div></div>`);
                     }
                 }
 
@@ -393,13 +395,7 @@ $(document).ready(function(){
      //for displaying who is typing
 
      $('#message').bind('input propertychange', function () {
-
-        scrollTopPadding = 8;
-        // get input tag's offset top position
-        var textareaTop = $(this).offset().top;
-       
-        // scroll to the textarea
-        $(this).scrollTop(textareaTop - scrollTopPadding);
+        
         socket.emit('type', {
             "status": "start",
             "channel": localStorage.getItem('currentChannel'),
@@ -419,13 +415,7 @@ $(document).ready(function(){
         });
     });
      
-    $("#message").focus(function() {
-        
-        document.body.scrollTop += this.getBoundingClientRect().top - 10
-        // OR  To add animation for smooth scrolling, use this. 
-        //$htmlOrBody.animate({ scrollTop: textareaTop - scrollTopPadding }, 200);
-   }); 
-
+    
 
     
 });

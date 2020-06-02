@@ -42,11 +42,11 @@ def index():
 def checkuser():
     UserName=request.form.get("username")
     usernames={"admin"}
-    print(users.keys())
+    
     for key,value in users.items():
         for user in value:
             usernames.add(user)
-        print(usernames)    
+           
     if UserName in usernames:
         return jsonify({"exists":True})
     else:
@@ -66,14 +66,14 @@ def handle_message(msg):
         
         users[msg["channel"]].append(msg["username"])
         append_message(channels[msg["channel"]],message)
-        print(channels[msg['channel']])
+        
         emit('announce_message', {'messages': channels[msg['channel']]}, broadcast=True)
         	
     elif "connection" in msg and msg['username'] in users[msg['channel']]:
         
 	    emit('announce_message', {'messages': channels[msg['channel']]})
     elif "connection" not in msg:
-        print("1")
+        
         message = {
 			"connection": False,
 			"text": msg['text'],
@@ -83,14 +83,14 @@ def handle_message(msg):
 			
 		}
         append_message(channels[msg['channel']], message)
-        print(channels[msg['channel']])
+        
         emit('announce_message', message, broadcast=True)
 
 @socketio.on("change_username")
 def change_username(msg):
     old_username=msg['old_username']
     new_username=msg['new_username']
-    
+    date= msg['date']
     for channel in channels.keys():
         for n,msg in enumerate(channels[channel]):
             if(msg['username']==old_username):
@@ -102,12 +102,11 @@ def change_username(msg):
 					"connection": True,
 					"text": f"is now {new_username}",
 					"username": old_username,
-				    "channel": channel
+				    "channel": channel,
+                    "date" : date
 				}
             append_message(channels[channel], message)
             users[channel][n] = new_username
-        print(channels[channel])
-        print("1")
         emit('announce_message', {'messages': channels[channel]},broadcast=True)
 
 
@@ -116,7 +115,7 @@ def add_channel(msg):
     if(msg['channel'] not in channels):
       channels[msg['channel']]=[]
       users[msg['channel']]=[]
-      print(channels)
+      
       emit('added_channel',{'message' : msg['channel']},broadcast=True)
 
 @socketio.on('get all channels')
