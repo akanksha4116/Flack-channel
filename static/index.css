@@ -10,7 +10,13 @@
     body {
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     }
-
+    
+    .close1{
+      border: none;  
+    }
+    .fa-window-close{
+        color: darkred;
+    }
     nav {
         position: fixed;
         left: 0;
@@ -248,6 +254,10 @@
     }
     .alert {
         display: none;
+    }
+    .show1
+    {
+    display: block
     }
 
     .typingUsers {

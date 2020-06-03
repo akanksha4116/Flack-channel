@@ -142,7 +142,7 @@ $(document).ready(function(){
 
             // Extract JSON data from request
             const data = JSON.parse(request.responseText);
-
+               
             // Update the result div
             if (!data.exists) {
                 let old_username = localStorage.getItem('username');
@@ -163,6 +163,8 @@ $(document).ready(function(){
                 });
 
             } else {
+                $("#change-username-input").val('')
+                
                 $(".change-user-exists-alert").css("display", "block");
             }
         }
@@ -182,7 +184,24 @@ $(document).ready(function(){
             tonesStyle: "bullet"
     });
 
+    $(".close1").on('click',function(){
+        
+        if($(".user-exists-alert").css("display", "block")){
+            $(".user-exists-alert").css("display", "none");
+        }
+        if($(".change-user-exists-alert").css("display", "block")){
+            $(".change-user-exists-alert").css("display", "none");
+        }
+        if($(".username-alert").css("display", "block")){
+            $(".username-alert").css("display", "none");
+        }
+        else{
+            $(".change-username-alert").css("display", "none");
+        }
     
+    });
+
+  
    
      //done
     $(".send-btn").on('click',function(){
@@ -207,6 +226,23 @@ $(document).ready(function(){
        }
         
     });
+
+    $("#public-channel-input").keyup(function (e) {
+        var code = e.which;
+        if (code == 13) {
+           
+            if ($("#public-channel-input").val() == "") {
+                return;
+            }
+           let channel= $("#public-channel-input").val()
+           $("#public-channel-input").val("");
+           socket.emit('add_channel',{
+               'channel':channel
+           });
+
+
+        
+        }});
 
     
 

@@ -41,12 +41,14 @@ def index():
 @app.route("/checkuser", methods=["POST"])
 def checkuser():
     UserName=request.form.get("username")
+    UserName=UserName.lower()
+    
     usernames={"admin"}
     
     for key,value in users.items():
         for user in value:
-            usernames.add(user)
-           
+            usernames.add(user.lower())
+        
     if UserName in usernames:
         return jsonify({"exists":True})
     else:
@@ -73,7 +75,7 @@ def handle_message(msg):
         
 	    emit('announce_message', {'messages': channels[msg['channel']]})
     elif "connection" not in msg:
-        
+        print(msg['text'])
         message = {
 			"connection": False,
 			"text": msg['text'],
@@ -83,7 +85,7 @@ def handle_message(msg):
 			
 		}
         append_message(channels[msg['channel']], message)
-        
+        print(channels[msg['channel']])
         emit('announce_message', message, broadcast=True)
 
 @socketio.on("change_username")
@@ -112,7 +114,11 @@ def change_username(msg):
 
 @socketio.on('add_channel')
 def add_channel(msg):
-    if(msg['channel'] not in channels):
+    c1=[]
+    for channel in channels.keys():
+        c1.append(channel.lower())
+
+    if(msg['channel'].lower() not in c1):
       channels[msg['channel']]=[]
       users[msg['channel']]=[]
       
