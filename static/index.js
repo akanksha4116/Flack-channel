@@ -25,8 +25,10 @@ $(document).ready(function(){
 
     
    $("#username-form").modal({backdrop: 'static', keyboard: false},'show');
+
    var months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    function get_date(){
+   //to get date
+   function get_date(){
       
         var date =new Date();
 
@@ -180,8 +182,34 @@ $(document).ready(function(){
 
    
     $("#emojionearea1").emojioneArea({
+        tonesStyle: "bullet",
+        events: {
+            keyup: function (editor, e) {
+                var code = e.which;
+        if (code == 13) {
+            date=get_date()
+              message =this.getText();
+              if($(".emojionearea-editor").html()=="")
+       {return}
+       else
+       { 
+       $(".emojionearea-editor").html('')
+       
+        socket.emit('send_message', {
+            "username": localStorage.getItem('username'),
+            "text": message,
+            "date": date,
+            "channel": localStorage.getItem('currentChannel'),
+            
+        });
         
-            tonesStyle: "bullet"
+                      
+        }//else
+            }
+        
+        }
+    }
+            
     });
 
     $(".close1").on('click',function(){
@@ -226,6 +254,16 @@ $(document).ready(function(){
        }
         
     });
+
+    $("#emojionearea1").keyup(function (e) {
+        var code = e.which;
+        if (code == 13) {
+            this.source.val(this.getText());
+            alert(this.source.val())
+        }
+    });
+
+  
 
     $("#public-channel-input").keyup(function (e) {
         var code = e.which;
