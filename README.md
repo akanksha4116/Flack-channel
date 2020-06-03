@@ -12,7 +12,9 @@ Static/index.css - css code
 
 Personal touch:
 @name- will take you to insta page of person
+
 #name link - Will also lead to Insta page if their is
+
 Showing to the users who is typing to the channel
 
 Link: https://flack-channel.herokuapp.com/
