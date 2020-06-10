@@ -223,7 +223,7 @@ $(document).ready(function(){
         
         if($(".user-exists-alert").css("display", "block")){
             $(".user-exists-alert").css("display", "none");
-            $("#username-input").val(' ')
+            $("#username-input").val("")
         }
         if($(".change-user-exists-alert").css("display", "block")){
             $(".change-user-exists-alert").css("display", "none");
