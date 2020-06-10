@@ -230,7 +230,7 @@ $(document).ready(function(){
         }
         if($(".username-alert").css("display", "block")){
             $(".username-alert").css("display", "none");
-            $("#username-input").val(' ')
+            
         }
         if($(".change-username-alert").css("display", "block")){
             $(".change-username-alert").css("display", "none");
