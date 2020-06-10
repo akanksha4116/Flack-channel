@@ -28,6 +28,13 @@ $(document).ready(function(){
 
    var months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
    //to get date
+
+   $(window).on('resize', function () {
+    var height = window.innerHeight - 56;
+    $("#main-div").css('height', height);
+    height -= 64;
+    $("#messages").css('height', height);
+});
    function get_date(){
       
         var date =new Date();
