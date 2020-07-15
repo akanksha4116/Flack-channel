@@ -199,7 +199,8 @@ $(document).ready(function(){
               if($(".emojionearea-editor").html()=="")
        {return}
        else
-       { 
+       { $(".emojionearea-picker").addClass("hidden")
+       $(".emojionearea-button").removeClass("active")
        $(".emojionearea-editor").html('')
        
         socket.emit('send_message', {
